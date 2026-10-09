@@ -2,165 +2,99 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101010">
-  <title>HUOMO | Barbería</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: #101010;
-      color: #f5f2eb;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-    header {
-      padding: 26px 20px;
-      border-bottom: 1px solid #292929;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo {
-      font-size: 27px;
-      font-weight: 800;
-      letter-spacing: 5px;
-    }
-    .status {
-      color: #c7a66a;
-      font-size: 11px;
-      letter-spacing: 1px;
-    }
-    main { padding: 22px 18px; max-width: 650px; margin: auto; }
-    .eyebrow {
-      color: #c7a66a;
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-    h1 { font-size: 28px; margin: 9px 0; }
-    .sub { color: #929292; font-size: 14px; margin-bottom: 24px; }
-    .stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-    .card {
-      background: #191919;
-      border: 1px solid #303030;
-      border-radius: 13px;
-      padding: 17px;
-      margin-bottom: 13px;
-    }
-    .stat-label { color: #a4a4a4; font-size: 12px; }
-    .stat-value { font-size: 24px; font-weight: 700; margin-top: 9px; }
-    .gold { color: #c7a66a; }
-    h2 { font-size: 17px; margin: 8px 0 17px; }
-    label {
-      display: block;
-      font-size: 12px;
-      color: #bdbdbd;
-      margin: 13px 0 7px;
-    }
-    input, select {
-      width: 100%;
-      background: #101010;
-      color: #fff;
-      border: 1px solid #393939;
-      border-radius: 8px;
-      padding: 13px;
-      font-size: 16px;
-    }
-    button {
-      width: 100%;
-      border: 0;
-      border-radius: 8px;
-      padding: 15px;
-      margin-top: 17px;
-      background: #c7a66a;
-      color: #101010;
-      font-size: 14px;
-      font-weight: 800;
-    }
-    .empty { color: #888; font-size: 13px; text-align: center; padding: 18px 0; }
-    .sale {
-      border-top: 1px solid #303030;
-      padding: 13px 0;
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-    }
-    .sale small { display: block; color: #999; margin-top: 5px; }
-    footer { text-align: center; color: #666; font-size: 11px; padding: 25px; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101010">
+<title>HUOMO | Gestión</title>
+<style>
+:root{--bg:#101010;--panel:#191919;--line:#303030;--gold:#c7a66a;--text:#f5f2eb;--muted:#999}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,sans-serif}
+header{padding:20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}
+.logo{font-size:25px;font-weight:800;letter-spacing:5px}
+.tag{font-size:10px;color:var(--gold);letter-spacing:1px}
+main{max-width:760px;margin:auto;padding:18px 14px 100px}
+h1{font-size:27px;margin:7px 0}
+h2{font-size:17px;margin:0 0 16px}
+h3{font-size:14px;margin:14px 0 8px}
+.muted{color:var(--muted);font-size:12px}
+.gold{color:var(--gold)}
+.tabs{display:flex;gap:7px;overflow:auto;padding:14px 0}
+.tabs button{width:auto;white-space:nowrap;margin:0;padding:11px 14px;background:#222;color:#ccc}
+.tabs button.active{background:var(--gold);color:#111}
+button{border:0;border-radius:8px;padding:13px;background:var(--gold);color:#111;font-weight:750;font-size:13px;cursor:pointer}
+button.secondary{background:#292929;color:var(--text);border:1px solid #3a3a3a}
+button.danger{background:#482727;color:#ffdede}
+button.small{padding:8px 10px;font-size:12px;width:auto;margin:3px 3px 3px 0}
+button.full{width:100%;margin-top:14px}
+input,select{width:100%;padding:12px;background:#101010;color:white;border:1px solid #393939;border-radius:8px;font-size:16px}
+label{display:block;color:#bbb;font-size:12px;margin:13px 0 6px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:13px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.stat{background:#151515;border:1px solid #303030;border-radius:10px;padding:13px;min-width:0}
+.stat .label{font-size:11px;color:#aaa}
+.stat .value{font-size:21px;font-weight:750;margin-top:8px;overflow-wrap:anywhere}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+hr{border:0;border-top:1px solid var(--line);margin:15px 0}
+.hidden{display:none!important}
+.sale{padding:13px 0;border-top:1px solid var(--line)}
+.sale:first-child{border-top:0}
+.sale-title{font-weight:700;overflow-wrap:anywhere}
+.sale-meta{font-size:12px;color:#aaa;margin-top:5px;line-height:1.6}
+.amount{font-weight:750;color:var(--gold);white-space:nowrap}
+.actions{display:flex;flex-wrap:wrap;margin-top:7px}
+.notice{padding:12px;border:1px solid #55482e;border-radius:8px;color:#ddc99f;font-size:12px;line-height:1.5}
+.empty{padding:18px 0;text-align:center;color:#888;font-size:13px}
+@media(min-width:600px){main{padding:25px}.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+</style>
 </head>
 <body>
-  <header>
+<header>
+  <div>
     <div class="logo">HUOMO</div>
-    <div class="status">● PANEL DE GESTIÓN</div>
-  </header>
+    <div class="tag">BARBERÍA · GESTIÓN</div>
+  </div>
+  <div class="tag">PANEL ADMIN</div>
+</header>
 
-  <main>
-    <div class="eyebrow">BARBERÍA · ADMINISTRACIÓN</div>
-    <h1>Panel de control</h1>
-    <p class="sub" id="fecha"></p>
+<main>
+  <div class="row">
+    <div>
+      <div class="muted" id="fecha"></div>
+      <h1 id="titulo">Panel de control</h1>
+    </div>
+  </div>
 
-    <div class="stats">
-      <div class="card">
-        <div class="stat-label">Ingresos del día</div>
-        <div class="stat-value gold" id="ingresos">$0</div>
-      </div>
-      <div class="card">
-        <div class="stat-label">Cortes registrados</div>
-        <div class="stat-value" id="cantidad">0</div>
-      </div>
+  <nav class="tabs">
+    <button class="active" data-tab="panel">Inicio</button>
+    <button data-tab="cortes">Cortes</button>
+    <button data-tab="caja">Caja</button>
+    <button data-tab="config">Configuración</button>
+  </nav>
+
+  <section id="vista-panel">
+    <div class="grid">
+      <div class="stat"><div class="label">Ingresos del día</div><div class="value gold" id="ingresos">$0</div></div>
+      <div class="stat"><div class="label">Cortes del día</div><div class="value" id="cantidad">0</div></div>
+      <div class="stat"><div class="label">Comisión barberos</div><div class="value" id="comisiones">$0</div></div>
+      <div class="stat"><div class="label">Parte barbería</div><div class="value" id="parte">$0</div></div>
     </div>
 
-    <section class="card">
-      <h2>Cierre de caja</h2>
-      <div class="stats">
-        <div>
-          <div class="stat-label">Efectivo</div>
-          <div class="stat-value" id="totalEfectivo">$0</div>
-        </div>
-        <div>
-          <div class="stat-label">Mercado Pago</div>
-          <div class="stat-value" id="totalMP">$0</div>
-        </div>
-        <div>
-          <div class="stat-label">Transferencias</div>
-          <div class="stat-value" id="totalTransferencias">$0</div>
-        </div>
-        <div>
-          <div class="stat-label">Tarjetas</div>
-          <div class="stat-value" id="totalTarjetas">$0</div>
-        </div>
-      </div>
-      <div style="border-top:1px solid #303030;margin-top:18px;padding-top:15px">
-        <div class="stat-label">TOTAL GENERAL DEL DÍA</div>
-        <div class="stat-value gold" id="totalCaja">$0</div>
-      </div>
-    </section>
-
-    <section class="card" style="margin-top:10px">
-      <h2>＋ Registrar un corte</h2>
-      <form id="formulario">
+    <div class="card" style="margin-top:13px">
+      <h2 id="formTitulo">＋ Registrar corte</h2>
+      <form id="formCorte">
+        <input type="hidden" id="corteId">
         <label for="cliente">Nombre del cliente</label>
-        <input id="cliente" placeholder="Ej. Martín" required>
+        <input id="cliente" maxlength="100" placeholder="Nombre del cliente" required>
 
         <label for="servicio">Servicio</label>
-        <select id="servicio">
-          <option>Corte</option>
-          <option>Corte + barba</option>
-          <option>Barba</option>
-          <option>Otro servicio</option>
-        </select>
+        <select id="servicio" required></select>
 
         <label for="barbero">Barbero</label>
-        <input id="barbero" placeholder="Nombre del barbero" required>
+        <select id="barbero" required></select>
 
-        <label for="importe">Importe ($)</label>
-        <input id="importe" type="number" min="1" step="1" placeholder="Ej. 12000" required>
+        <label for="importe">Importe cobrado ($)</label>
+        <input id="importe" type="number" min="1" step="0.01" placeholder="Ej. 12000" required>
 
         <label for="pago">Medio de pago</label>
         <select id="pago">
@@ -170,132 +104,373 @@
           <option>Tarjeta</option>
         </select>
 
-        <button type="submit">GUARDAR CORTE</button>
+        <label for="fechaCorte">Fecha del corte</label>
+        <input id="fechaCorte" type="date" required>
+
+        <button class="full" type="submit" id="guardarCorte">GUARDAR CORTE</button>
+        <button class="full secondary hidden" type="button" id="cancelarEdicion">CANCELAR EDICIÓN</button>
       </form>
-    </section>
+    </div>
 
-    <section class="card">
-      <h2>Últimos movimientos</h2>
-      <div id="movimientos" class="empty">Todavía no hay cortes registrados.</div>
-    </section>
-  </main>
+    <div class="card">
+      <div class="row"><h2>Últimos movimientos</h2><button class="secondary small" onclick="irA('cortes')">Ver todos</button></div>
+      <div id="ultimos" class="empty">Todavía no hay cortes.</div>
+    </div>
+  </section>
 
-  <footer>HUOMO · SISTEMA DE GESTIÓN</footer>
+  <section id="vista-cortes" class="hidden">
+    <div class="card">
+      <h2>Historial de cortes</h2>
+      <label for="buscar">Buscar cliente o barbero</label>
+      <input id="buscar" placeholder="Escribí un nombre...">
+      <label for="filtroFecha">Filtrar por fecha</label>
+      <input id="filtroFecha" type="date">
+      <button class="secondary full" id="limpiarFiltros" type="button">LIMPIAR FILTROS</button>
+      <div id="listaCortes" style="margin-top:14px"></div>
+    </div>
+  </section>
 
-  <script>
-    const clave = "huomo_cortes_v1";
-    const dinero = n => new Intl.NumberFormat("es-AR", {
-      style: "currency", currency: "ARS",
-      maximumFractionDigits: 0
-    }).format(n);
+  <section id="vista-caja" class="hidden">
+    <div class="card">
+      <h2>Cierre de caja</h2>
+      <label for="fechaCaja">Fecha a consultar</label>
+      <input type="date" id="fechaCaja">
+      <div class="grid" style="margin-top:14px">
+        <div class="stat"><div class="label">Efectivo</div><div class="value" id="cEfectivo">$0</div></div>
+        <div class="stat"><div class="label">Mercado Pago</div><div class="value" id="cMP">$0</div></div>
+        <div class="stat"><div class="label">Transferencias</div><div class="value" id="cTransfer">$0</div></div>
+        <div class="stat"><div class="label">Tarjetas</div><div class="value" id="cTarjeta">$0</div></div>
+      </div>
+      <hr>
+      <div class="row"><span>Total registrado</span><strong class="gold" id="cTotal">$0</strong></div>
+      <div class="row" style="margin-top:12px"><span>Comisión de barberos</span><strong id="cComision">$0</strong></div>
+      <div class="row" style="margin-top:12px"><span>Parte de barbería</span><strong id="cParte">$0</strong></div>
+      <div class="muted" style="margin-top:14px">Los importes reflejan los cortes registrados, no una verificación bancaria real.</div>
+    </div>
 
-    document.getElementById("fecha").textContent =
-      new Date().toLocaleDateString("es-AR", {
-        weekday: "long", day: "numeric", month: "long", year: "numeric"
-      });
+    <div class="card">
+      <h2>Resumen semanal</h2>
+      <label for="fechaSemana">Elegí cualquier día de la semana</label>
+      <input type="date" id="fechaSemana">
+      <div class="grid" style="margin-top:14px">
+        <div class="stat"><div class="label">Facturación semanal</div><div class="value gold" id="sTotal">$0</div></div>
+        <div class="stat"><div class="label">Comisiones</div><div class="value" id="sComision">$0</div></div>
+        <div class="stat"><div class="label">Parte barbería</div><div class="value" id="sParte">$0</div></div>
+        <div class="stat"><div class="label">Cantidad de cortes</div><div class="value" id="sCantidad">0</div></div>
+      </div>
+      <div id="semanaTexto" class="muted" style="margin-top:12px"></div>
+    </div>
+  </section>
 
-    let cortes = [];
-    try {
-      cortes = JSON.parse(localStorage.getItem(clave) || "[]");
-    } catch (e) {
-      cortes = [];
+  <section id="vista-config" class="hidden">
+    <div class="card">
+      <h2>Datos de la barbería</h2>
+      <label for="nombreBarberia">Nombre del negocio</label>
+      <input id="nombreBarberia" maxlength="100">
+      <label for="porcentaje">Comisión del barbero (%)</label>
+      <input id="porcentaje" type="number" min="0" max="100" step="1">
+      <div class="muted">El porcentaje se aplica a los nuevos cortes. Los cortes ya registrados conservan su comisión original.</div>
+      <button class="full" id="guardarConfig">GUARDAR CONFIGURACIÓN</button>
+    </div>
+
+    <div class="card">
+      <h2>Barberos</h2>
+      <label for="nuevoBarbero">Agregar barbero</label>
+      <div class="row">
+        <input id="nuevoBarbero" placeholder="Nombre del barbero">
+        <button id="agregarBarbero" type="button">Agregar</button>
+      </div>
+      <div id="listaBarberos" style="margin-top:12px"></div>
+    </div>
+
+    <div class="card">
+      <h2>Servicios y precios</h2>
+      <label for="nuevoServicio">Nombre del servicio</label>
+      <input id="nuevoServicio" placeholder="Ej. Corte + barba">
+      <label for="precioServicio">Precio ($)</label>
+      <input id="precioServicio" type="number" min="0" step="0.01" placeholder="Ej. 15000">
+      <button class="full" id="agregarServicio" type="button">AGREGAR SERVICIO</button>
+      <div id="listaServicios" style="margin-top:12px"></div>
+    </div>
+
+    <div class="card">
+      <h2>Respaldo de datos</h2>
+      <p class="muted">Descargá una copia de tus cortes y configuración para evitar perderlos si el navegador borra sus datos.</p>
+      <button class="full" id="exportar">EXPORTAR RESPALDO JSON</button>
+      <label for="importarArchivo">Restaurar un respaldo JSON</label>
+      <input type="file" id="importarArchivo" accept=".json,application/json">
+      <button class="full secondary" id="importar">RESTAURAR RESPALDO</button>
+      <div class="notice" style="margin-top:15px">Los datos se guardan en este navegador. No se sincronizan automáticamente con otros dispositivos. Exportá respaldos con frecuencia y no borres los datos de Safari.</div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+"use strict";
+const KEY="huomo_app_v3";
+const $=id=>document.getElementById(id);
+const hoy=()=>fechaISO(new Date());
+function fechaISO(d){
+  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+}
+function dinero(n){
+  return new Intl.NumberFormat("es-AR",{style:"currency",currency:"ARS",maximumFractionDigits:2}).format(Number(n)||0);
+}
+function idNuevo(){return Date.now().toString(36)+Math.random().toString(36).slice(2,8);}
+function inicial(){
+  return {
+    config:{nombre:"HUOMO",porcentaje:50},
+    barberos:["Fran"],
+    servicios:[
+      {id:idNuevo(),nombre:"Corte",precio:12000},
+      {id:idNuevo(),nombre:"Corte + barba",precio:16000},
+      {id:idNuevo(),nombre:"Barba",precio:8000}
+    ],
+    cortes:[]
+  };
+}
+function cargar(){
+  try{
+    const d=JSON.parse(localStorage.getItem(KEY)||"null");
+    if(d&&Array.isArray(d.cortes)&&Array.isArray(d.servicios)&&Array.isArray(d.barberos)){
+      d.config=d.config||{nombre:"HUOMO",porcentaje:50};
+      return d;
     }
+  }catch(e){}
+  return inicial();
+}
+let db=cargar();
+let archivoImportado=null;
+function guardar(){
+  try{
+    localStorage.setItem(KEY,JSON.stringify(db));
+    return true;
+  }catch(e){
+    alert("No se pudieron guardar los datos en este navegador. Exportá un respaldo y revisá el espacio disponible.");
+    return false;
+  }
+}
+function cortesFecha(f){return db.cortes.filter(c=>c.fecha===f);}
+function suma(lista){return lista.reduce((a,c)=>a+Number(c.importe||0),0);}
+function comision(c){return Number(c.comisionMonto??(Number(c.importe||0)*Number(c.porcentaje||0)/100));}
+function totalComisiones(lista){return lista.reduce((a,c)=>a+comision(c),0);}
+function renderSelects(){
+  const sv=$("servicio"),br=$("barbero"),prevS=sv.value,prevB=br.value;
+  sv.replaceChildren();br.replaceChildren();
+  db.servicios.forEach(s=>{
+    const o=document.createElement("option");o.value=s.id;o.textContent=s.nombre+" — "+dinero(s.precio);sv.append(o);
+  });
+  db.barberos.forEach(b=>{
+    const o=document.createElement("option");o.value=b;o.textContent=b;br.append(o);
+  });
+  if(db.servicios.some(s=>s.id===prevS))sv.value=prevS;
+  if(db.barberos.includes(prevB))br.value=prevB;
+}
+function crearFila(c){
+  const el=document.createElement("div");el.className="sale";
+  const top=document.createElement("div");top.className="row";
+  const left=document.createElement("div");
+  const name=document.createElement("div");name.className="sale-title";name.textContent=c.cliente;
+  const meta=document.createElement("div");meta.className="sale-meta";
+  meta.textContent=c.servicioNombre+" · "+c.barbero+" · "+c.pago+" · "+c.fecha+" · Comisión "+Number(c.porcentaje||0)+"% ("+dinero(comision(c))+")";
+  left.append(name,meta);
+  const amount=document.createElement("div");amount.className="amount";amount.textContent=dinero(c.importe);
+  top.append(left,amount);el.append(top);
+  const actions=document.createElement("div");actions.className="actions";
+  const editar=document.createElement("button");editar.className="secondary small";editar.textContent="Editar";editar.type="button";editar.addEventListener("click",()=>editarCorte(c.id));
+  const borrar=document.createElement("button");borrar.className="danger small";borrar.textContent="Eliminar";borrar.type="button";borrar.addEventListener("click",()=>eliminarCorte(c.id));
+  actions.append(editar,borrar);el.append(actions);
+  return el;
+}
+function ponerLista(id,lista){
+  const el=$(id);el.replaceChildren();
+  if(!lista.length){el.className="empty";el.textContent="Todavía no hay cortes registrados.";return;}
+  el.className="";lista.slice().reverse().forEach(c=>el.append(crearFila(c)));
+}
+function renderPanel(){
+  const lista=cortesFecha(hoy());
+  $("ingresos").textContent=dinero(suma(lista));
+  $("cantidad").textContent=lista.length;
+  $("comisiones").textContent=dinero(totalComisiones(lista));
+  $("parte").textContent=dinero(suma(lista)-totalComisiones(lista));
+  ponerLista("ultimos",db.cortes.slice(-5));
+}
+function renderCortes(){
+  const q=$("buscar").value.trim().toLowerCase(),f=$("filtroFecha").value;
+  const lista=db.cortes.filter(c=>(!q||(c.cliente+" "+c.barbero).toLowerCase().includes(q))&&(!f||c.fecha===f));
+  ponerLista("listaCortes",lista);
+}
+function renderCaja(){
+  const lista=cortesFecha($("fechaCaja").value||hoy());
+  const pagos=[
+    ["Efectivo","cEfectivo"],["Mercado Pago","cMP"],
+    ["Transferencia bancaria","cTransfer"],["Tarjeta","cTarjeta"]
+  ];
+  pagos.forEach(([p,id])=>$(id).textContent=dinero(suma(lista.filter(c=>c.pago===p))));
+  $("cTotal").textContent=dinero(suma(lista));
+  $("cComision").textContent=dinero(totalComisiones(lista));
+  $("cParte").textContent=dinero(suma(lista)-totalComisiones(lista));
 
-    function mostrar() {
-      const hoy = new Date().toLocaleDateString("en-CA");
-      const delDia = cortes.filter(c => c.fecha === hoy);
-      document.getElementById("ingresos").textContent =
-        dinero(delDia.reduce((s, c) => s + c.importe, 0));
-      
-      const hoy = new Date().toLocaleDateString("en-CA");
-      const delDia = cortes.filter(c => c.fecha === hoy);
-
-      const total = lista =>
-        lista.reduce((s, c) => s + c.importe, 0);
-
-      document.getElementById("ingresos").textContent =
-        dinero(total(delDia));
-
-      document.getElementById("cantidad").textContent =
-        delDia.length;
-
-      document.getElementById("totalEfectivo").textContent =
-        dinero(total(delDia.filter(c => c.pago === "Efectivo")));
-
-      document.getElementById("totalMP").textContent =
-        dinero(total(delDia.filter(c => c.pago === "Mercado Pago")));
-
-      document.getElementById("totalTransferencias").textContent =
-        dinero(total(delDia.filter(c => c.pago === "Transferencia bancaria")));
-
-      document.getElementById("totalTarjetas").textContent =
-        dinero(total(delDia.filter(c => c.pago === "Tarjeta")));
-
-      document.getElementById("totalCaja").textContent =
-        dinero(total(delDia));
-
-
-      const zona = document.getElementById("movimientos");
-      if (!cortes.length) {
-        zona.className = "empty";
-        zona.textContent = "Todavía no hay cortes registrados.";
-        return;
-      }
-
-      zona.className = "";
-      zona.replaceChildren();
-      cortes.slice().reverse().forEach(c => {
-        const fila = document.createElement("div");
-        fila.className = "sale";
-        const detalle = document.createElement("div");
-        const nombre = document.createElement("strong");
-        nombre.textContent = c.cliente;
-        const info = document.createElement("small");
-        info.textContent = c.servicio + " · " + c.barbero + " · " + c.pago;
-        detalle.append(nombre, info);
-        const precio = document.createElement("strong");
-        precio.className = "gold";
-        precio.textContent = dinero(c.importe);
-        fila.append(detalle, precio);
-        zona.append(fila);
-      });
-    }
-
-    document.getElementById("formulario").addEventListener("submit", e => {
-      e.preventDefault();
-      const cliente = document.getElementById("cliente").value.trim();
-      const barbero = document.getElementById("barbero").value.trim();
-      const importe = Number(document.getElementById("importe").value);
-
-      if (!cliente || !barbero || !Number.isFinite(importe) || importe <= 0) {
-        alert("Revisá los datos del corte.");
-        return;
-      }
-
-      cortes.push({
-        cliente,
-        servicio: document.getElementById("servicio").value,
-        barbero,
-        importe,
-        pago: document.getElementById("pago").value,
-        fecha: new Date().toLocaleDateString("en-CA")
-      });
-
-      try {
-        localStorage.setItem(clave, JSON.stringify(cortes));
-      } catch (err) {
-        alert("No se pudieron guardar los datos en este navegador.");
-        cortes.pop();
-        return;
-      }
-
-      e.target.reset();
-      mostrar();
-      alert("Corte registrado correctamente.");
+  const base=new Date(($("fechaSemana").value||hoy())+"T12:00:00");
+  const dia=(base.getDay()+6)%7;
+  const lunes=new Date(base);lunes.setDate(base.getDate()-dia);
+  const domingo=new Date(lunes);domingo.setDate(lunes.getDate()+6);
+  const ini=fechaISO(lunes),fin=fechaISO(domingo);
+  const semana=db.cortes.filter(c=>c.fecha>=ini&&c.fecha<=fin);
+  $("sTotal").textContent=dinero(suma(semana));
+  $("sComision").textContent=dinero(totalComisiones(semana));
+  $("sParte").textContent=dinero(suma(semana)-totalComisiones(semana));
+  $("sCantidad").textContent=semana.length;
+  $("semanaTexto").textContent="Período: "+ini+" al "+fin;
+}
+function renderConfig(){
+  $("nombreBarberia").value=db.config.nombre||"HUOMO";
+  $("porcentaje").value=db.config.porcentaje??50;
+  const lb=$("listaBarberos");lb.replaceChildren();
+  db.barberos.forEach((b,i)=>{
+    const row=document.createElement("div");row.className="sale row";
+    const name=document.createElement("strong");name.textContent=b;
+    const btn=document.createElement("button");btn.className="danger small";btn.textContent="Eliminar";btn.type="button";
+    btn.addEventListener("click",()=>{
+      if(db.barberos.length<=1){alert("Debe quedar al menos un barbero.");return;}
+      if(!confirm("¿Eliminar a "+b+" de la lista? Los cortes anteriores se conservan."))return;
+      db.barberos.splice(i,1);if(guardar())renderTodo();
     });
-
-    mostrar();
-  </script>
+    row.append(name,btn);lb.append(row);
+  });
+  const ls=$("listaServicios");ls.replaceChildren();
+  db.servicios.forEach((s,i)=>{
+    const row=document.createElement("div");row.className="sale";
+    const top=document.createElement("div");top.className="row";
+    const name=document.createElement("strong");name.textContent=s.nombre;
+    const price=document.createElement("span");price.className="amount";price.textContent=dinero(s.precio);
+    top.append(name,price);row.append(top);
+    const actions=document.createElement("div");actions.className="actions";
+    const edit=document.createElement("button");edit.className="secondary small";edit.textContent="Editar";
+    edit.addEventListener("click",()=>{
+      const n=prompt("Nombre del servicio:",s.nombre);if(n===null)return;
+      const p=prompt("Precio del servicio:",String(s.precio));if(p===null)return;
+      const precio=Number(p);
+      if(!n.trim()||!Number.isFinite(precio)||precio<0){alert("Nombre o precio no válido.");return;}
+      s.nombre=n.trim();s.precio=precio;if(guardar())renderTodo();
+    });
+    const del=document.createElement("button");del.className="danger small";del.textContent="Eliminar";
+    del.addEventListener("click",()=>{
+      if(!confirm("¿Eliminar este servicio? Los cortes anteriores se conservan."))return;
+      db.servicios.splice(i,1);if(guardar())renderTodo();
+    });
+    actions.append(edit,del);row.append(actions);ls.append(row);
+  });
+}
+function renderTodo(){
+  $("fecha").textContent=new Date().toLocaleDateString("es-AR",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+  document.title=(db.config.nombre||"HUOMO")+" | Gestión";
+  renderSelects();renderPanel();renderCortes();renderCaja();renderConfig();
+}
+function editarCorte(id){
+  const c=db.cortes.find(x=>x.id===id);if(!c)return;
+  irA("panel");
+  $("corteId").value=c.id;$("cliente").value=c.cliente;
+  $("servicio").value=c.servicioId||"";
+  $("barbero").value=c.barbero;$("importe").value=c.importe;
+  $("pago").value=c.pago;$("fechaCorte").value=c.fecha;
+  $("formTitulo").textContent="Editar corte";
+  $("guardarCorte").textContent="GUARDAR CAMBIOS";
+  $("cancelarEdicion").classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function resetForm(){
+  $("formCorte").reset();$("corteId").value="";
+  $("fechaCorte").value=hoy();$("formTitulo").textContent="＋ Registrar corte";
+  $("guardarCorte").textContent="GUARDAR CORTE";
+  $("cancelarEdicion").classList.add("hidden");
+}
+function eliminarCorte(id){
+  if(!confirm("¿Seguro que querés eliminar este corte?"))return;
+  const anterior=db.cortes;db.cortes=anterior.filter(c=>c.id!==id);
+  if(guardar())renderTodo();else db.cortes=anterior;
+}
+function irA(tab){
+  document.querySelectorAll("[data-tab]").forEach(b=>b.classList.toggle("active",b.dataset.tab===tab));
+  ["panel","cortes","caja","config"].forEach(t=>$("vista-"+t).classList.toggle("hidden",t!==tab));
+  $("titulo").textContent=({panel:"Panel de control",cortes:"Historial de cortes",caja:"Caja y cierres",config:"Configuración"})[tab];
+  if(tab==="panel")renderPanel();if(tab==="cortes")renderCortes();if(tab==="caja")renderCaja();if(tab==="config")renderConfig();
+}
+document.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()=>irA(b.dataset.tab)));
+$("formCorte").addEventListener("submit",e=>{
+  e.preventDefault();
+  const cliente=$("cliente").value.trim(),servicio=db.servicios.find(s=>s.id===$("servicio").value);
+  const barbero=$("barbero").value,importe=Number($("importe").value),fecha=$("fechaCorte").value;
+  if(!cliente||!servicio||!barbero||!Number.isFinite(importe)||importe<=0||!fecha){alert("Revisá los datos del corte.");return;}
+  const id=$("corteId").value;
+  if(id){
+    const c=db.cortes.find(x=>x.id===id);if(!c)return;
+    c.cliente=cliente;c.servicioId=servicio.id;c.servicioNombre=servicio.nombre;
+    c.barbero=barbero;c.importe=importe;c.pago=$("pago").value;c.fecha=fecha;
+    // Al editar se conserva el porcentaje de comisión que tenía el corte.
+  }else{
+    const porcentaje=Number(db.config.porcentaje??50);
+    db.cortes.push({
+      id:idNuevo(),cliente,servicioId:servicio.id,servicioNombre:servicio.nombre,
+      barbero,importe,pago:$("pago").value,fecha,porcentaje,
+      comisionMonto:importe*porcentaje/100
+    });
+  }
+  if(guardar()){resetForm();renderTodo();irA("panel");alert(id?"Corte actualizado correctamente.":"Corte guardado correctamente.");}
+});
+$("cancelarEdicion").addEventListener("click",resetForm);
+$("servicio").addEventListener("change",()=>{
+  const s=db.servicios.find(x=>x.id===$("servicio").value);
+  if(s&&!$("corteId").value)$("importe").value=s.precio;
+});
+$("buscar").addEventListener("input",renderCortes);
+$("filtroFecha").addEventListener("change",renderCortes);
+$("limpiarFiltros").addEventListener("click",()=>{$("buscar").value="";$("filtroFecha").value="";renderCortes();});
+$("fechaCaja").addEventListener("change",renderCaja);
+$("fechaSemana").addEventListener("change",renderCaja);
+$("guardarConfig").addEventListener("click",()=>{
+  const nombre=$("nombreBarberia").value.trim(),p=Number($("porcentaje").value);
+  if(!nombre||!Number.isFinite(p)||p<0||p>100){alert("Ingresá un nombre y una comisión entre 0 y 100%.");return;}
+  db.config.nombre=nombre;db.config.porcentaje=p;
+  if(guardar()){renderTodo();alert("Configuración guardada.");}
+});
+$("agregarBarbero").addEventListener("click",()=>{
+  const n=$("nuevoBarbero").value.trim();if(!n)return;
+  if(db.barberos.some(b=>b.toLowerCase()===n.toLowerCase())){alert("Ese barbero ya existe.");return;}
+  db.barberos.push(n);$("nuevoBarbero").value="";
+  if(guardar())renderTodo();
+});
+$("agregarServicio").addEventListener("click",()=>{
+  const nombre=$("nuevoServicio").value.trim(),precio=Number($("precioServicio").value);
+  if(!nombre||$("precioServicio").value===""||!Number.isFinite(precio)||precio<0){alert("Ingresá el nombre y un precio válido.");return;}
+  db.servicios.push({id:idNuevo(),nombre,precio});
+  $("nuevoServicio").value="";$("precioServicio").value="";
+  if(guardar())renderTodo();
+});
+$("exportar").addEventListener("click",()=>{
+  const blob=new Blob([JSON.stringify(db,null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download="huomo-respaldo-"+hoy()+".json";a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
+$("importarArchivo").addEventListener("change",async e=>{
+  const f=e.target.files[0];if(!f){archivoImportado=null;return;}
+  try{
+    const d=JSON.parse(await f.text());
+    if(!d||!Array.isArray(d.cortes)||!Array.isArray(d.servicios)||!Array.isArray(d.barberos)||!d.config)throw Error();
+    archivoImportado=d;
+  }catch(e){archivoImportado=null;alert("El archivo no parece un respaldo válido de HUOMO.");}
+});
+$("importar").addEventListener("click",()=>{
+  if(!archivoImportado){alert("Primero seleccioná un archivo JSON válido.");return;}
+  if(!confirm("Esto reemplazará los datos actuales de HUOMO. Exportá un respaldo antes de continuar. ¿Seguimos?"))return;
+  const anterior=db;db=archivoImportado;
+  if(guardar()){renderTodo();alert("Respaldo restaurado.");}else db=anterior;
+});
+$("fechaCorte").value=hoy();$("fechaCaja").value=hoy();$("fechaSemana").value=hoy();
+renderTodo();
+})();
+</script>
 </body>
 </html>
-
