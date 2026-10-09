@@ -206,7 +206,34 @@
       const delDia = cortes.filter(c => c.fecha === hoy);
       document.getElementById("ingresos").textContent =
         dinero(delDia.reduce((s, c) => s + c.importe, 0));
-      document.getElementById("cantidad").textContent = delDia.length;
+      
+      const hoy = new Date().toLocaleDateString("en-CA");
+      const delDia = cortes.filter(c => c.fecha === hoy);
+
+      const total = lista =>
+        lista.reduce((s, c) => s + c.importe, 0);
+
+      document.getElementById("ingresos").textContent =
+        dinero(total(delDia));
+
+      document.getElementById("cantidad").textContent =
+        delDia.length;
+
+      document.getElementById("totalEfectivo").textContent =
+        dinero(total(delDia.filter(c => c.pago === "Efectivo")));
+
+      document.getElementById("totalMP").textContent =
+        dinero(total(delDia.filter(c => c.pago === "Mercado Pago")));
+
+      document.getElementById("totalTransferencias").textContent =
+        dinero(total(delDia.filter(c => c.pago === "Transferencia bancaria")));
+
+      document.getElementById("totalTarjetas").textContent =
+        dinero(total(delDia.filter(c => c.pago === "Tarjeta")));
+
+      document.getElementById("totalCaja").textContent =
+        dinero(total(delDia));
+
 
       const zona = document.getElementById("movimientos");
       if (!cortes.length) {
